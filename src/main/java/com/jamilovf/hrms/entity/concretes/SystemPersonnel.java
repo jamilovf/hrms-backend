@@ -10,14 +10,9 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+@PrimaryKeyJoinColumn(name = "person_id")
 @Table(name = "system_personnel")
-public class SystemPersonnel extends User{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
+public class SystemPersonnel extends Person{
 
     @Column(name = "first_name")
     private String firstName;

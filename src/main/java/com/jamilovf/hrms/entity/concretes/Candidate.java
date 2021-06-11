@@ -5,20 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+@PrimaryKeyJoinColumn(name = "person_id")
 @Table(name = "candidate")
-public class Candidate extends User{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int userId;
+public class Candidate extends Person{
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,8 +24,9 @@ public class Candidate extends User{
     private String identityNumber;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private String birthDate;
 
     @Column(name = "is_verified")
     private boolean isVerified;
+
 }
