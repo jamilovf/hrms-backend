@@ -1,10 +1,7 @@
 package com.jamilovf.hrms.business.concretes;
 
 import com.jamilovf.hrms.business.abstracts.JobPositionService;
-import com.jamilovf.hrms.core.utils.results.DataResult;
-import com.jamilovf.hrms.core.utils.results.Result;
-import com.jamilovf.hrms.core.utils.results.SuccessDataResult;
-import com.jamilovf.hrms.core.utils.results.SuccessResult;
+import com.jamilovf.hrms.core.utils.results.*;
 import com.jamilovf.hrms.dao.abstracts.JobPositionDao;
 import com.jamilovf.hrms.entity.concretes.JobPosition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +21,9 @@ public class JobPositionManager implements JobPositionService {
 
     @Override
     public Result add(JobPosition jobPosition) {
+        if(this.jobPositionDao.getByPosition(jobPosition.getPosition()) != null){
+            return new ErrorResult("Job position already exists");
+        }
         this.jobPositionDao.save(jobPosition);
         return new SuccessResult("Job position is added: " + jobPosition.getPosition());
     }
