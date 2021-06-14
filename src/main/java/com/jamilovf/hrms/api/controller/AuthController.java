@@ -3,6 +3,7 @@ package com.jamilovf.hrms.api.controller;
 import com.jamilovf.hrms.business.abstracts.AuthService;
 import com.jamilovf.hrms.core.utils.results.Result;
 import com.jamilovf.hrms.entity.concretes.Candidate;
+import com.jamilovf.hrms.entity.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,5 +24,10 @@ public class AuthController {
     @PostMapping("/registerCandidate")
     public Result registerCandidate(@RequestBody Candidate candidate){
         return this.authService.registerCandidate(candidate);
+    }
+
+    @PostMapping("/registerEmployer")
+    public Result registerEmployer(@RequestBody Employer employer) {
+        return this.authService.registerEmployer(employer);
     }
 }

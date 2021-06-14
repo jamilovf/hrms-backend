@@ -48,6 +48,12 @@ public class AuthManager implements AuthService {
 
     @Override
     public Result registerEmployer(Employer employer) {
-        return null;
+        if(this.employerDao.getByEmail(employer.getEmail()) != null){
+            return new ErrorResult("Employer with this email already exists");
+        }
+        this.employerService.add(employer);
+
+        return new SuccessResult("Employer registered successfully. "
+                + emailService.sendEmail(employer.getEmail()));
     }
 }
