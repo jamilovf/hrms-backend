@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -19,9 +22,14 @@ public class Person {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Email is mandatory")
+    @NotNull(message = "Email has to be present")
+    @Email
     @Column(name = "email")
     private String email;
 
+    @NotBlank(message = "Password is mandatory")
+    @NotNull(message = "Password has to be present")
     @Column(name = "password")
     private String password;
 

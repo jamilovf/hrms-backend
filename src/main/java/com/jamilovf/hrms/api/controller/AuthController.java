@@ -1,14 +1,20 @@
 package com.jamilovf.hrms.api.controller;
 
 import com.jamilovf.hrms.business.abstracts.AuthService;
+import com.jamilovf.hrms.core.utils.results.ErrorDataResult;
 import com.jamilovf.hrms.core.utils.results.Result;
 import com.jamilovf.hrms.entity.concretes.Candidate;
 import com.jamilovf.hrms.entity.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,12 +28,27 @@ public class AuthController {
     }
 
     @PostMapping("/registerCandidate")
-    public Result registerCandidate(@RequestBody Candidate candidate){
-        return this.authService.registerCandidate(candidate);
+    public ResponseEntity<?> registerCandidate(@Valid @RequestBody Candidate candidate){
+        return ResponseEntity.ok(this.authService.registerCandidate(candidate));
     }
 
     @PostMapping("/registerEmployer")
-    public Result registerEmployer(@RequestBody Employer employer) {
-        return this.authService.registerEmployer(employer);
+    public ResponseEntity<?>  registerEmployer(@Valid @RequestBody Employer employer) {
+        return ResponseEntity.ok(this.authService.registerEmployer(employer));
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDataResult<Object> handleValidationException
+            (MethodArgumentNotValidException exceptions){
+
+        Map<String,String> validationErrors = new HashMap<>();
+        for(FieldError fieldError : exceptions.getBindingResult().getFieldErrors()){
+            validationErrors.put(fieldError.getField(),fieldError.getDefaultMessage());
+        }
+
+        ErrorDataResult<Object> errors =
+                new ErrorDataResult<>(validationErrors,"Validation errors");
+        return errors;
     }
 }

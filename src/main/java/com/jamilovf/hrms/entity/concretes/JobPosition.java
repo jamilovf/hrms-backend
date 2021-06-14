@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -18,6 +20,8 @@ public class JobPosition {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "Position is mandatory")
+    @NotNull(message = "Position has to be present")
     @Column(name = "position")
     private String position;
 }

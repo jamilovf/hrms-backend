@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -14,9 +16,13 @@ import javax.persistence.*;
 @Table(name = "system_personnel")
 public class SystemPersonnel extends Person{
 
+    @NotBlank(message = "First name is mandatory")
+    @NotNull(message = "First name has to be present")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "Last name is mandatory")
+    @NotNull(message = "Last name has to be present")
     @Column(name = "last_name")
     private String lastName;
 
