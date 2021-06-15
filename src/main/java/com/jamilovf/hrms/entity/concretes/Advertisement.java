@@ -41,6 +41,9 @@ public class Advertisement {
     @Column(name = "open_positions")
     private int openPositions;
 
+    @Column(name = "created_at")
+    private LocalDate createdAt;
+
     @Column(name = "application_date")
     private LocalDate applicationDeadline;
 
