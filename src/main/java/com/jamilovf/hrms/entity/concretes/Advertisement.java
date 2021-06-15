@@ -1,10 +1,14 @@
 package com.jamilovf.hrms.entity.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -12,6 +16,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "advertisement")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Advertisement {
 
     @Id
@@ -20,24 +25,27 @@ public class Advertisement {
     private int id;
 
     @ManyToOne
-    @Column(name = "job_position_id")
+    @JoinColumn(name = "job_position_id")
     private JobPosition jobPosition;
 
     @ManyToOne
-    @Column(name = "city_id")
+    @JoinColumn(name = "city_id")
     private City city;
 
     @ManyToOne
-    @Column(name = "employer_id")
+    @JoinColumn(name = "employer_id")
     private Employer employer;
 
     @ManyToOne
-    @Column(name = "salary_scale_id")
+    @JoinColumn(name = "salary_scale_id")
     private SalaryScale salaryScale;
 
+    @NotBlank(message = "Job description is mandatory")
+    @NotNull(message = "Job description has to be present")
     @Column(name = "job_description")
     private String jobDescription;
 
+    @NotNull(message = "Open positions have to be present")
     @Column(name = "open_positions")
     private int openPositions;
 
