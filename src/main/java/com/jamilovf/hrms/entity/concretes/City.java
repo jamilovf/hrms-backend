@@ -1,11 +1,14 @@
 package com.jamilovf.hrms.entity.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -21,9 +24,12 @@ public class City {
     @Column(name = "id")
     private int id;
 
+    @NotBlank(message = "City is mandatory")
+    @NotNull(message = "City has to be present")
     @Column(name = "name")
     private String name;
 
     @OneToMany(mappedBy = "city")
+    @ApiModelProperty(required = false, hidden = true)
     private List<Advertisement> advertisements;
 }

@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -36,10 +36,6 @@ public class Advertisement {
     @JoinColumn(name = "employer_id")
     private Employer employer;
 
-    @ManyToOne
-    @JoinColumn(name = "salary_scale_id")
-    private SalaryScale salaryScale;
-
     @NotBlank(message = "Job description is mandatory")
     @NotNull(message = "Job description has to be present")
     @Column(name = "job_description")
@@ -52,8 +48,14 @@ public class Advertisement {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
-    @Column(name = "application_date")
+    @Column(name = "application_deadline")
     private LocalDate applicationDeadline;
+
+    @Column(name = "min_salary")
+    private BigDecimal minSalary;
+
+    @Column(name = "max_salary")
+    private BigDecimal maxSalary;
 
     @Column(name = "is_active")
     private boolean isActive;
