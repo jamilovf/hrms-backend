@@ -13,4 +13,6 @@ public interface AdvertisementService {
     DataResult<List<AdvertisementDto>> getAllActiveAdvertisements();
 
     DataResult<List<AdvertisementDto>> getAllActiveAdvertisementsSortedByDate();
+
+    DataResult<List<AdvertisementDto>> getAllActiveAdvertisementsByEmployer(int employerId);
 }

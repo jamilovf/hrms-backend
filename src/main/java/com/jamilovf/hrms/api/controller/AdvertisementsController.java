@@ -43,6 +43,11 @@ public class AdvertisementsController {
         return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisementsSortedByDate());
     }
 
+    @GetMapping("/getAllActiveAdvertisementsByEmployer")
+    public ResponseEntity<?> getAllActiveAdvertisementsByEmployer(@RequestParam int employerId){
+        return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisementsByEmployer(employerId));
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException

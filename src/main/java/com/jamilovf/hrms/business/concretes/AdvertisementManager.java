@@ -46,4 +46,17 @@ public class AdvertisementManager implements AdvertisementService {
         return new SuccessDataResult<>(this.advertisementDao.getAllActiveAdvertisementsSortedByDate(),
                 "All active advertisements are listed by release date");
     }
+
+    @Override
+    public DataResult<List<AdvertisementDto>> getAllActiveAdvertisementsByEmployer(int employerId) {
+        List<AdvertisementDto> advertisementDtoList =
+                this.advertisementDao.getAllActiveAdvertisementsByEmployer(employerId);
+
+        if (advertisementDtoList.isEmpty()){
+            return new SuccessDataResult<>(advertisementDtoList,
+                    "There are no active advertisements for this company");
+        }
+        return new SuccessDataResult<>(advertisementDtoList,
+                "All active advertisements of this company are listed");
+    }
 }
