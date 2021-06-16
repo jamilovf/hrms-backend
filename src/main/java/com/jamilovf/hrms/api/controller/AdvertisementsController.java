@@ -30,6 +30,11 @@ public class AdvertisementsController {
         return ResponseEntity.ok(this.advertisementService.add(advertisement));
     }
 
+    @GetMapping("/getAllActiveAdvertisements")
+    public ResponseEntity<?> getAllActiveAdvertisements(){
+        return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisements());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorDataResult<Object> handleValidationException
