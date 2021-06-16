@@ -59,4 +59,11 @@ public class AdvertisementManager implements AdvertisementService {
         return new SuccessDataResult<>(advertisementDtoList,
                 "All active advertisements of this company are listed");
     }
+
+    @Override
+    public Result changeAdvertisementStatus(boolean status, int id) {
+        this.advertisementDao.changeAdvertisementStatus(status,id);
+        return new SuccessResult("Advertisement status is updated");
+    }
+
 }

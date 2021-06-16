@@ -3,6 +3,7 @@ package com.jamilovf.hrms.api.controller;
 import com.jamilovf.hrms.business.abstracts.AdvertisementService;
 import com.jamilovf.hrms.core.utils.results.DataResult;
 import com.jamilovf.hrms.core.utils.results.ErrorDataResult;
+import com.jamilovf.hrms.core.utils.results.Result;
 import com.jamilovf.hrms.dto.AdvertisementDto;
 import com.jamilovf.hrms.entity.concretes.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class AdvertisementsController {
     @GetMapping("/getAllActiveAdvertisementsByEmployer")
     public ResponseEntity<?> getAllActiveAdvertisementsByEmployer(@RequestParam int employerId){
         return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisementsByEmployer(employerId));
+    }
+
+    @PostMapping("/changeAdvertisementStatus")
+    public ResponseEntity<?> changeAdvertisementStatus(@RequestParam  boolean status, @RequestParam int id){
+        return ResponseEntity.ok(this.advertisementService.changeAdvertisementStatus(status,id));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
