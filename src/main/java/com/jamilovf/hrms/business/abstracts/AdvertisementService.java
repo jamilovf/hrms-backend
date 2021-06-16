@@ -11,4 +11,6 @@ public interface AdvertisementService {
     Result add(Advertisement advertisement);
 
     DataResult<List<AdvertisementDto>> getAllActiveAdvertisements();
+
+    DataResult<List<AdvertisementDto>> getAllActiveAdvertisementsSortedByDate();
 }

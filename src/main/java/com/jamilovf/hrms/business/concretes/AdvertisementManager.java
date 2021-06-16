@@ -40,4 +40,10 @@ public class AdvertisementManager implements AdvertisementService {
         return new SuccessDataResult<>(this.advertisementDao.getAllActiveAdvertisements(),
                 "All active advertisements are listed");
     }
+
+    @Override
+    public DataResult<List<AdvertisementDto>> getAllActiveAdvertisementsSortedByDate() {
+        return new SuccessDataResult<>(this.advertisementDao.getAllActiveAdvertisementsSortedByDate(),
+                "All active advertisements are listed by release date");
+    }
 }

@@ -1,7 +1,9 @@
 package com.jamilovf.hrms.api.controller;
 
 import com.jamilovf.hrms.business.abstracts.AdvertisementService;
+import com.jamilovf.hrms.core.utils.results.DataResult;
 import com.jamilovf.hrms.core.utils.results.ErrorDataResult;
+import com.jamilovf.hrms.dto.AdvertisementDto;
 import com.jamilovf.hrms.entity.concretes.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,6 +36,11 @@ public class AdvertisementsController {
     @GetMapping("/getAllActiveAdvertisements")
     public ResponseEntity<?> getAllActiveAdvertisements(){
         return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisements());
+    }
+
+    @GetMapping("/getAllActiveAdvertisementsSortedByDate")
+    public ResponseEntity<?> getAllActiveAdvertisementsSortedByDate(){
+        return ResponseEntity.ok(this.advertisementService.getAllActiveAdvertisementsSortedByDate());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
