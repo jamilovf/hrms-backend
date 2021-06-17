@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -38,5 +39,21 @@ public class Candidate extends Person{
 
     @Column(name = "is_verified")
     private boolean isVerified;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateLanguage> candidateLanguageList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateSchool> candidateSchoolList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateTechnologyStack> candidateTechnologyStackList;
+
+
+    @OneToMany(mappedBy = "candidate")
+    private List<Cv> cvList;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateExperience> candidateExperienceList;
 
 }
