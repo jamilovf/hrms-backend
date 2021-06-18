@@ -32,7 +32,7 @@ public class CandidateLanguage {
     @ManyToOne
     private Language language;
 
-    @OneToMany(mappedBy = "candidateLanguageId")
+    @OneToMany(mappedBy = "candidateLanguage")
     private List<Cv> cvList;
 
 }
