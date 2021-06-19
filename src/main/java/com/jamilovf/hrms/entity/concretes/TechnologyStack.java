@@ -26,6 +26,6 @@ public class TechnologyStack {
     private String technologyName;
 
     @OneToMany(mappedBy = "technologyStack")
-    private List<CandidateTechnologyStack> candidateTechnologyStackList;
+    private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
 }

@@ -29,6 +29,6 @@ public class Language {
     private int level;
 
     @OneToMany(mappedBy = "language")
-    private List<CandidateLanguage> candidateLanguageList;
+    private List<CvCandidateLanguage> cvCandidateLanguageList;
 
 }

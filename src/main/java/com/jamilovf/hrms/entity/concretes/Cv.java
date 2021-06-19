@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,25 +22,21 @@ public class Cv {
     @Column(name = "cover_letter")
     private String coverLetter;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @ManyToOne
-    @JoinColumn(name = "candidate_experience_id")
-    private CandidateExperience candidateExperience;
+    @OneToMany(mappedBy = "cv")
+    private List<CvCandidateEducation> cvCandidateEducationList;
 
-    @ManyToOne
-    @JoinColumn(name = "candidate_language_id")
-    private CandidateLanguage candidateLanguage;
+    @OneToMany(mappedBy = "cv")
+    private List<CvCandidateExperience> cvCandidateExperienceList;
 
-    @ManyToOne
-    @JoinColumn(name = "candidate_school_id")
-    private CandidateSchool candidateSchool;
+    @OneToMany(mappedBy = "cv")
+    private List<CvCandidateLanguage> cvCandidateLanguageList;
 
-    @ManyToOne
-    @JoinColumn(name = "candidate_technology_stack_id")
-    private CandidateTechnologyStack candidateTechnologyStack;
+    @OneToMany(mappedBy = "cv")
+    private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
     @OneToOne
     @JoinColumn(name = "cv_image_id")

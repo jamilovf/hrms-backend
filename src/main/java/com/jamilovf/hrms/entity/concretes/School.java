@@ -26,6 +26,6 @@ public class School {
     private String name;
 
     @OneToMany(mappedBy = "school")
-    private List<CandidateSchool> candidateSchoolList;
+    private List<CvCandidateEducation> cvCandidateEducationList;
 
 }

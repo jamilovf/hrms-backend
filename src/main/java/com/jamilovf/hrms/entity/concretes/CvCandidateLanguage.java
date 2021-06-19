@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,33 +17,24 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "candidate_experience")
-public class CandidateExperience {
+@Table(name = "candidate_language")
+public class CvCandidateLanguage {
 
     @Id
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "entry_year")
-    private Date entryYear;
-
-    @Column(name = "leaving_year")
-    private Date leavingYear;
-
-    @OneToMany(mappedBy = "candidateExperience")
-    private List<Cv> cvList;
-
     @JoinColumn(name = "candidate_id")
     @ManyToOne
     private Candidate candidate;
 
-    @JoinColumn(name = "company_id")
+    @JoinColumn(name = "language_id")
     @ManyToOne
-    private ExperienceCompany company;
+    private Language language;
 
-    @JoinColumn(name = "position_id")
+    @JoinColumn(name = "cv_id")
     @ManyToOne
-    private ExperiencePosition position;
+    private Cv cv;
 
 }
 

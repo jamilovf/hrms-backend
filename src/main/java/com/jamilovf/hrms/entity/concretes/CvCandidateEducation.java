@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "candidate_school")
-public class CandidateSchool {
+public class CvCandidateEducation {
 
     @Id
     @Column(name = "id")
@@ -43,7 +43,8 @@ public class CandidateSchool {
     @ManyToOne
     private School school;
 
-    @OneToMany(mappedBy = "candidateSchool")
-    private List<Cv> cvList;
+    @JoinColumn(name = "cv_id")
+    @ManyToOne
+    private Cv cv;
 
 }

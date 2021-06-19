@@ -26,6 +26,6 @@ public class ExperienceCompany {
     private String name;
 
     @OneToMany(mappedBy = "company")
-    private List<CandidateExperience> candidateExperienceList;
+    private List<CvCandidateExperience> cvCandidateExperienceList;
 
 }
