@@ -4,12 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -27,7 +22,7 @@ public class CvImage {
     @Column(name = "url")
     private String url;
 
-    @OneToMany(mappedBy = "cvImage")
-    private List<Cv> cvList;
+    @OneToOne(mappedBy = "cvImage")
+    private Cv cv;
 
 }

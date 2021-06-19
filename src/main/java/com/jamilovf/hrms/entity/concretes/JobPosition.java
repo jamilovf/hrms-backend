@@ -18,7 +18,7 @@ public class JobPosition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "Position is mandatory")
     @NotNull(message = "Position has to be present")

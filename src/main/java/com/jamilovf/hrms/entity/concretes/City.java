@@ -22,7 +22,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "City is mandatory")
     @NotNull(message = "City has to be present")

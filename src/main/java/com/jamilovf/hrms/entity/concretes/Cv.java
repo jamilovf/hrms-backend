@@ -18,7 +18,6 @@ public class Cv {
     @Column(name = "id")
     private int id;
 
-
     @Column(name = "cover_letter")
     private String coverLetter;
 
@@ -42,11 +41,11 @@ public class Cv {
     @JoinColumn(name = "candidate_technology_stack_id")
     private CandidateTechnologyStack candidateTechnologyStack;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "cv_image_id")
     private CvImage cvImage;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "social_media_details_id")
     private SocialMediaDetails socialMediaDetails;
 

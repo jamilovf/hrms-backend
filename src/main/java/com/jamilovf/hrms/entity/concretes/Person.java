@@ -20,7 +20,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "Email is mandatory")
     @NotNull(message = "Email has to be present")
