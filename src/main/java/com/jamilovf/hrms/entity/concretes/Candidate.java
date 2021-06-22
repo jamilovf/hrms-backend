@@ -40,19 +40,19 @@ public class Candidate extends Person{
     @Column(name = "is_verified")
     private boolean isVerified;
 
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CvCandidateLanguage> cvCandidateLanguageList;
 
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CvCandidateEducation> cvCandidateEducationList;
 
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
     @OneToOne(mappedBy = "candidate")
     private Cv cv;
 
-    @OneToMany(mappedBy = "candidate")
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<CvCandidateExperience> cvCandidateExperienceList;
 
 }

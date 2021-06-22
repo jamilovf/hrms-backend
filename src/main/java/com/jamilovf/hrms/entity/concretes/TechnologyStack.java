@@ -5,11 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,13 +15,14 @@ import javax.persistence.Table;
 public class TechnologyStack {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "technology_name")
     private String technologyName;
 
-    @OneToMany(mappedBy = "technologyStack")
+    @OneToMany(mappedBy = "technologyStack", cascade = CascadeType.ALL)
     private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
 }

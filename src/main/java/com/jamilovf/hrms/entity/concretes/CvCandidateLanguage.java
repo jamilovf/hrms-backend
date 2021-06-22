@@ -5,22 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "candidate_language")
+@Table(name = "cv_candidate_language")
 public class CvCandidateLanguage {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -35,6 +30,10 @@ public class CvCandidateLanguage {
     @JoinColumn(name = "cv_id")
     @ManyToOne
     private Cv cv;
+
+    @JoinColumn(name = "language_level_id")
+    @ManyToOne
+    private LanguageLevel languageLevel;
 
 }
 

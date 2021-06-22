@@ -26,16 +26,16 @@ public class Cv {
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
     private List<CvCandidateEducation> cvCandidateEducationList;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
     private List<CvCandidateExperience> cvCandidateExperienceList;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
     private List<CvCandidateLanguage> cvCandidateLanguageList;
 
-    @OneToMany(mappedBy = "cv")
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
     private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
     @OneToOne
