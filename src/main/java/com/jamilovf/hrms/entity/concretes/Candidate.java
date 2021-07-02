@@ -2,17 +2,18 @@ package com.jamilovf.hrms.entity.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @PrimaryKeyJoinColumn(name = "person_id")
 @Table(name = "candidate")
 public class Candidate extends Person{
@@ -40,19 +41,6 @@ public class Candidate extends Person{
     @Column(name = "is_verified")
     private boolean isVerified;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<CvCandidateLanguage> cvCandidateLanguageList;
-
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<CvCandidateEducation> cvCandidateEducationList;
-
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
-
     @OneToOne(mappedBy = "candidate")
     private Cv cv;
-
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-    private List<CvCandidateExperience> cvCandidateExperienceList;
-
 }

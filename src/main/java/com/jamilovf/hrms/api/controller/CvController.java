@@ -1,6 +1,7 @@
 package com.jamilovf.hrms.api.controller;
 
 import com.jamilovf.hrms.business.abstracts.CvService;
+import com.jamilovf.hrms.dto.CvDto;
 import com.jamilovf.hrms.entity.concretes.Cv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CvController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody Cv cv){
-        return ResponseEntity.ok(this.cvService.add(cv));
+    public ResponseEntity<?> add(@RequestBody CvDto cvDto){
+        return ResponseEntity.ok(this.cvService.add(cvDto));
     }
 }
