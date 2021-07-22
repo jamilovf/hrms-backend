@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "city")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","advertisements"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","advertisementList"})
 public class City {
 
     @Id
@@ -34,5 +34,5 @@ public class City {
 
     @OneToMany(mappedBy = "city")
     @ApiModelProperty(required = false, hidden = true)
-    private List<Advertisement> advertisements;
+    private List<Advertisement> advertisementList;
 }
