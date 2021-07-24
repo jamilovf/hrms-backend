@@ -20,6 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/advertisements")
+@CrossOrigin
 public class AdvertisementsController {
 
     private AdvertisementService advertisementService;
