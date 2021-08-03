@@ -7,8 +7,8 @@ public class CvCandidateEducationMapper {
     public static CvCandidateEducationDto entityToDto(CvCandidateEducation cvCandidateEducation){
         return new CvCandidateEducationDto()
                 .setId(cvCandidateEducation.getId())
-                .setSchool(cvCandidateEducation.getSchool())
-                .setDepartment(cvCandidateEducation.getDepartment())
+                .setSchoolDto(SchoolMapper.entityToDto(cvCandidateEducation.getSchool()))
+                .setDepartmentDto(DepartmentMapper.entityToDto(cvCandidateEducation.getDepartment()))
                 .setEntryYear(cvCandidateEducation.getEntryYear())
                 .setGraduateYear(cvCandidateEducation.getGraduateYear());
     }
@@ -16,8 +16,8 @@ public class CvCandidateEducationMapper {
     public static CvCandidateEducation dtoToEntity(CvCandidateEducationDto cvCandidateEducationDto){
         return new CvCandidateEducation()
                 .setId(cvCandidateEducationDto.getId())
-                .setSchool(cvCandidateEducationDto.getSchool())
-                .setDepartment(cvCandidateEducationDto.getDepartment())
+                .setSchool(SchoolMapper.dtoToEntity(cvCandidateEducationDto.getSchoolDto()))
+                .setDepartment(DepartmentMapper.dtoToEntity(cvCandidateEducationDto.getDepartmentDto()))
                 .setEntryYear(cvCandidateEducationDto.getEntryYear())
                 .setGraduateYear(cvCandidateEducationDto.getGraduateYear());
     }

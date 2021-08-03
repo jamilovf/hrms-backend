@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 public class CvCandidateEducationDto {
     private Integer id;
-    private School school;
-    private Department department;
+    private SchoolDto schoolDto;
+    private DepartmentDto departmentDto;
     private LocalDate entryYear;
     private LocalDate graduateYear;
 }

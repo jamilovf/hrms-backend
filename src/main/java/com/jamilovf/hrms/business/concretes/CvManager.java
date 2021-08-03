@@ -48,7 +48,7 @@ public class CvManager implements CvService {
                 .map(c -> c.setCv(cv))
                 .collect(Collectors.toList());
 
-        cv.getCvImage().setCv(cv);
+        cv.getCvImage().setCv(cv); 
         cv.getSocialMediaDetails().setCv(cv);
 
         this.cvDao.save(cv);

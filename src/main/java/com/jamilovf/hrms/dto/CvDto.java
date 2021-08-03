@@ -20,6 +20,6 @@ public class CvDto {
     private List<CvCandidateExperienceDto> cvCandidateExperienceDtoList;
     private List<CvCandidateLanguageDto> cvCandidateLanguageDtoList;
     private List<CvCandidateTechnologyStackDto> cvCandidateTechnologyStackDtoList;
-    private CvImage cvImage;
-    private SocialMediaDetails socialMediaDetails;
+    private CvImageDto cvImageDto;
+    private SocialMediaDetailsDto socialMediaDetailsDto;
 }

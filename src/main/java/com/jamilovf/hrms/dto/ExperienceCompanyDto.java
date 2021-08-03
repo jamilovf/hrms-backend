@@ -1,7 +1,5 @@
 package com.jamilovf.hrms.dto;
 
-import com.jamilovf.hrms.entity.concretes.Language;
-import com.jamilovf.hrms.entity.concretes.LanguageLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +9,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class CvCandidateLanguageDto {
+public class ExperienceCompanyDto {
     private Integer id;
-    private LanguageDto languageDto;
-    private LanguageLevelDto languageLevelDto;
+    private String name;
 }

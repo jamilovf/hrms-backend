@@ -38,11 +38,11 @@ public class CvCandidateExperience {
 
     @JoinColumn(name = "company_id")
     @ManyToOne(cascade = CascadeType.ALL)
-    private ExperienceCompany company;
+    private ExperienceCompany experienceCompany;
 
     @JoinColumn(name = "position_id")
     @ManyToOne(cascade = CascadeType.ALL)
-    private ExperiencePosition position;
+    private ExperiencePosition experiencePosition;
 
 }
 

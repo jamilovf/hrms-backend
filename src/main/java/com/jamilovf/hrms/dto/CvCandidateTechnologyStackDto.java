@@ -12,5 +12,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CvCandidateTechnologyStackDto {
     private Integer id;
-    private TechnologyStack technologyStack;
+    private TechnologyStackDto technologyStackDto;
 }

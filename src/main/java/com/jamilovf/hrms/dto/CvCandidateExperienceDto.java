@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Accessors(chain = true)
 public class CvCandidateExperienceDto {
     private Integer id;
-    private ExperienceCompany company;
-    private ExperiencePosition position;
+    private ExperienceCompanyDto experienceCompanyDto;
+    private ExperiencePositionDto experiencePositionDto;
     private LocalDate entryYear;
     private LocalDate leavingYear;
 }

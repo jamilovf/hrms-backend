@@ -7,8 +7,8 @@ public class CvCandidateExperienceMapper {
     public static CvCandidateExperienceDto entityToDto(CvCandidateExperience cvCandidateExperience){
         return new CvCandidateExperienceDto()
                 .setId(cvCandidateExperience.getId())
-                .setCompany(cvCandidateExperience.getCompany())
-                .setPosition(cvCandidateExperience.getPosition())
+                .setExperienceCompanyDto(ExperienceCompanyMapper.entityToDto(cvCandidateExperience.getExperienceCompany()))
+                .setExperiencePositionDto(ExperiencePositionMapper.entityToDto(cvCandidateExperience.getExperiencePosition()))
                 .setEntryYear(cvCandidateExperience.getEntryYear())
                 .setLeavingYear(cvCandidateExperience.getLeavingYear());
     }
@@ -16,8 +16,8 @@ public class CvCandidateExperienceMapper {
     public static CvCandidateExperience dtoToEntity(CvCandidateExperienceDto cvCandidateExperienceDto){
         return new CvCandidateExperience()
                 .setId(cvCandidateExperienceDto.getId())
-                .setCompany(cvCandidateExperienceDto.getCompany())
-                .setPosition(cvCandidateExperienceDto.getPosition())
+                .setExperienceCompany(ExperienceCompanyMapper.dtoToEntity(cvCandidateExperienceDto.getExperienceCompanyDto()))
+                .setExperiencePosition(ExperiencePositionMapper.dtoToEntity(cvCandidateExperienceDto.getExperiencePositionDto()))
                 .setEntryYear(cvCandidateExperienceDto.getEntryYear())
                 .setLeavingYear(cvCandidateExperienceDto.getLeavingYear());
     }

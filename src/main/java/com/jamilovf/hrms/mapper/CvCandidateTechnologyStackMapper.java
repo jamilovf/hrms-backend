@@ -7,12 +7,12 @@ public class CvCandidateTechnologyStackMapper {
     public static CvCandidateTechnologyStackDto entityToDto(CvCandidateTechnologyStack cvCandidateTechnologyStack){
         return new CvCandidateTechnologyStackDto()
                 .setId(cvCandidateTechnologyStack.getId())
-                .setTechnologyStack(cvCandidateTechnologyStack.getTechnologyStack());
+                .setTechnologyStackDto(TechnologyStackMapper.entityToDto(cvCandidateTechnologyStack.getTechnologyStack()));
     }
 
     public static CvCandidateTechnologyStack dtoToEntity(CvCandidateTechnologyStackDto cvCandidateTechnologyStackDto){
         return new CvCandidateTechnologyStack()
                 .setId(cvCandidateTechnologyStackDto.getId())
-                .setTechnologyStack(cvCandidateTechnologyStackDto.getTechnologyStack());
+                .setTechnologyStack(TechnologyStackMapper.dtoToEntity(cvCandidateTechnologyStackDto.getTechnologyStackDto()));
     }
 }

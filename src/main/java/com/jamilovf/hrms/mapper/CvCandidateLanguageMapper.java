@@ -7,14 +7,14 @@ public class CvCandidateLanguageMapper {
     public static CvCandidateLanguageDto entityToDto(CvCandidateLanguage cvCandidateLanguage){
         return new CvCandidateLanguageDto()
                 .setId(cvCandidateLanguage.getId())
-                .setLanguage(cvCandidateLanguage.getLanguage())
-                .setLanguageLevel(cvCandidateLanguage.getLanguageLevel());
+                .setLanguageDto(LanguageMapper.entityToDto(cvCandidateLanguage.getLanguage()))
+                .setLanguageLevelDto(LanguageLevelMapper.entityToDto(cvCandidateLanguage.getLanguageLevel()));
     }
 
     public static CvCandidateLanguage dtoToEntity(CvCandidateLanguageDto cvCandidateLanguageDto){
         return new CvCandidateLanguage()
                 .setId(cvCandidateLanguageDto.getId())
-                .setLanguage(cvCandidateLanguageDto.getLanguage())
-                .setLanguageLevel(cvCandidateLanguageDto.getLanguageLevel());
+                .setLanguage(LanguageMapper.dtoToEntity(cvCandidateLanguageDto.getLanguageDto()))
+                .setLanguageLevel(LanguageLevelMapper.dtoToEntity(cvCandidateLanguageDto.getLanguageLevelDto()));
     }
 }

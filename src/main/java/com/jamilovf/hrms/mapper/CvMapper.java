@@ -11,8 +11,8 @@ public class CvMapper {
                 .setId(cv.getId())
                 .setCandidateId(cv.getCandidate().getId())
                 .setCoverLetter(cv.getCoverLetter())
-                .setCvImage(cv.getCvImage())
-                .setSocialMediaDetails(cv.getSocialMediaDetails());
+                .setCvImageDto(CvImageMapper.entityToDto(cv.getCvImage()))
+                .setSocialMediaDetailsDto(SocialMediaDetailsMapper.entityToDto(cv.getSocialMediaDetails()));
 
                 cvDto.setCvCandidateEducationDtoList(cv.getCvCandidateEducationList().stream()
                                                .map(c -> CvCandidateEducationMapper.entityToDto(c))
@@ -37,8 +37,8 @@ public class CvMapper {
         Cv cv = new Cv()
                 .setId(cvDto.getId())
                 .setCoverLetter(cvDto.getCoverLetter())
-                .setCvImage(cvDto.getCvImage())
-                .setSocialMediaDetails(cvDto.getSocialMediaDetails());
+                .setCvImage(CvImageMapper.dtoToEntity(cvDto.getCvImageDto()))
+                .setSocialMediaDetails(SocialMediaDetailsMapper.dtoToEntity(cvDto.getSocialMediaDetailsDto()));
 
         cv.setCvCandidateEducationList(cvDto.getCvCandidateEducationDtoList().stream()
                 .map(c -> CvCandidateEducationMapper.dtoToEntity(c))

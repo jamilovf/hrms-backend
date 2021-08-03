@@ -15,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/cities")
+@CrossOrigin
 public class CitiesController {
 
     private CityService cityService;
@@ -27,6 +28,11 @@ public class CitiesController {
     @PostMapping("/add")
     public ResponseEntity<?> add(@RequestBody City city){
         return ResponseEntity.ok(this.cityService.add(city));
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getALL() {
+        return ResponseEntity.ok(this.cityService.getAll());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Accessors(chain = true)
 @Table(name = "social_media_details")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","cv"})
 public class SocialMediaDetails {
