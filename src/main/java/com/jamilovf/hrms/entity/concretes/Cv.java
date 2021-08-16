@@ -33,22 +33,22 @@ public class Cv {
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvCandidateEducation> cvCandidateEducationList;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvCandidateExperience> cvCandidateExperienceList;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvCandidateLanguage> cvCandidateLanguageList;
 
-    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CvCandidateTechnologyStack> cvCandidateTechnologyStackList;
 
-    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private CvImage cvImage;
 
-    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "cv", cascade = CascadeType.ALL, orphanRemoval = true)
     private SocialMediaDetails socialMediaDetails;
 
 }

@@ -35,7 +35,7 @@ public class CvCandidateLanguage {
     private Cv cv;
 
     @JoinColumn(name = "language_level_id")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private LanguageLevel languageLevel;
 
 }
