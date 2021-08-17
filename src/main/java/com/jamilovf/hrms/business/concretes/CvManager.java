@@ -37,17 +37,10 @@ public class CvManager implements CvService {
 
         Candidate candidate = this.candidateDao.getById(cvDto.getCandidateId());
 
-        List<LanguageLevel> languageLevelList =
-                this.languageLevelDao
-                        .findByLevelIn(cvDto.getCvCandidateLanguageDtoList()
-                                .stream()
-                                .map(l -> l.getLanguageLevelDto().getLevel())
-                                .collect(Collectors.toList()));
-
-        List<LanguageLevelDto> languageLevelDtoList = languageLevelList.stream()
-                                                    .map(l -> LanguageLevelMapper.entityToDto(l))
-                                                    .collect(Collectors.toList());
-        System.err.println(languageLevelDtoList);
+        cv.getCvCandidateLanguageList().forEach( l -> {
+            LanguageLevel languageLevel = languageLevelDao.findByLevel(l.getLanguageLevel().getLevel());
+            l.getLanguageLevel().setId(languageLevel.getId());
+        } );
 
         cv.setCandidate(candidate);
 
@@ -62,16 +55,6 @@ public class CvManager implements CvService {
         cv.getCvCandidateLanguageList().stream()
                 .map(c -> c.setCv(cv))
                 .collect(Collectors.toList());
-
-      /*  languageLevelDtoList.stream()
-                .map(l -> cv.getCvCandidateLanguageList().stream()
-                .map(c -> c.setLanguageLevel(LanguageLevelMapper.dtoToEntity(l))));*/
-
-        for(int i = 0; i < languageLevelDtoList.size(); i++){
-            cv.getCvCandidateLanguageList().get(i)
-                    .setLanguageLevel(LanguageLevelMapper
-                            .dtoToEntity(languageLevelDtoList.get(i)));
-        }
 
         cv.getCvCandidateTechnologyStackList().stream()
                 .map(c -> c.setCv(cv))
