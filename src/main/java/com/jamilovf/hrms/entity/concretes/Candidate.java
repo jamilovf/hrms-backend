@@ -1,13 +1,16 @@
 package com.jamilovf.hrms.entity.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -15,6 +18,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @PrimaryKeyJoinColumn(name = "person_id")
+@Accessors(chain = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","cv"})
 @Table(name = "candidate")
 public class Candidate extends Person{
 
@@ -36,7 +41,7 @@ public class Candidate extends Person{
     @NotBlank(message = "Birth date is mandatory")
     @NotNull(message = "Birth date has to be present")
     @Column(name = "birth_date")
-    private String birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "is_verified")
     private boolean isVerified;

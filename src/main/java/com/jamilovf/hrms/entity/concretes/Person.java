@@ -1,9 +1,11 @@
 package com.jamilovf.hrms.entity.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,6 +18,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.JOINED)
+@Accessors(chain = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","cv"})
 @Table(name = "person")
 public class Person {
 
