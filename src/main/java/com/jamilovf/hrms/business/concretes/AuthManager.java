@@ -1,5 +1,6 @@
 package com.jamilovf.hrms.business.concretes;
 
+import com.jamilovf.hrms.dto.EmployerDto;
 import com.jamilovf.hrms.exceptions.AuthServiceException;
 import com.jamilovf.hrms.business.abstracts.AuthService;
 import com.jamilovf.hrms.business.abstracts.CandidateService;
@@ -15,6 +16,7 @@ import com.jamilovf.hrms.dto.CandidateDto;
 import com.jamilovf.hrms.entity.concretes.Candidate;
 import com.jamilovf.hrms.entity.concretes.Employer;
 import com.jamilovf.hrms.mapper.CandidateMapper;
+import com.jamilovf.hrms.mapper.EmployerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -63,11 +65,14 @@ public class AuthManager implements AuthService {
     }
 
     @Override
-    public Result registerEmployer(Employer employer) {
+    public Result registerEmployer(EmployerDto employerDto) {
+        Employer employer = EmployerMapper.dtoToEntity(employerDto);
+
         if(this.employerDao.getByEmail(employer.getEmail()) != null){
             throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
         }
-
+        employer.setEmail(employerDto.getEmail());
+        employer.setPassword(bCryptPasswordEncoder.encode(employerDto.getPassword()));
         this.employerService.add(employer);
 
         return new SuccessResult("Employer registered successfully. "

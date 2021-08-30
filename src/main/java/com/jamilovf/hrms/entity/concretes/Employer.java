@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @PrimaryKeyJoinColumn(name = "person_id")
+@Accessors(chain = true)
 @Table(name = "employer")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","advertisementList"})
 public class Employer extends Person {
