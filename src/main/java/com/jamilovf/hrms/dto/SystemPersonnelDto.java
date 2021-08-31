@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 public class SystemPersonnelDto {
     private String email;
     private String password;
+    private String passwordConfirmation;
     private String firstName;
     private String lastName;
 }

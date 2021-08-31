@@ -21,6 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
 public class AuthController {
 
     private AuthService authService;
@@ -43,6 +44,11 @@ public class AuthController {
     @PostMapping("/registerSystemPersonnel")
     public ResponseEntity<?> registerSystemPersonnel(@Valid @RequestBody SystemPersonnelDto systemPersonnelDto) {
         return ResponseEntity.ok(this.authService.registerSystemPersonnel(systemPersonnelDto));
+    }
+
+    @GetMapping("/verifyEmailToken")
+    public ResponseEntity<?> verifyEmailToken(@RequestParam String token){
+        return ResponseEntity.ok(this.authService.verifyEmailToken(token));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

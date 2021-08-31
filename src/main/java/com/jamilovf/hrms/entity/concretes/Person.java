@@ -40,4 +40,10 @@ public class Person {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "emailVerificationToken")
+    private String emailVerificationToken;
+
+    @Column(name = "emailVerificationStatus")
+    private Boolean emailVerificationStatus;
+
 }
