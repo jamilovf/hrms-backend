@@ -5,6 +5,7 @@ import com.jamilovf.hrms.core.utils.results.ErrorDataResult;
 import com.jamilovf.hrms.core.utils.results.Result;
 import com.jamilovf.hrms.dto.CandidateDto;
 import com.jamilovf.hrms.dto.EmployerDto;
+import com.jamilovf.hrms.dto.SystemPersonnelDto;
 import com.jamilovf.hrms.entity.concretes.Candidate;
 import com.jamilovf.hrms.entity.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,13 @@ public class AuthController {
     }
 
     @PostMapping("/registerEmployer")
-    public ResponseEntity<?>  registerEmployer(@Valid @RequestBody EmployerDto employerDto) {
+    public ResponseEntity<?> registerEmployer(@Valid @RequestBody EmployerDto employerDto) {
         return ResponseEntity.ok(this.authService.registerEmployer(employerDto));
+    }
+
+    @PostMapping("/registerSystemPersonnel")
+    public ResponseEntity<?> registerSystemPersonnel(@Valid @RequestBody SystemPersonnelDto systemPersonnelDto) {
+        return ResponseEntity.ok(this.authService.registerSystemPersonnel(systemPersonnelDto));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
