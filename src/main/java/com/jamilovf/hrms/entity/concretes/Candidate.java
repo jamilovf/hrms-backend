@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -48,4 +49,7 @@ public class Candidate extends Person{
 
     @OneToOne(mappedBy = "candidate")
     private Cv cv;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate")
+    private List<FavoriteCandidateAdvertisement> favoriteCandidateAdvertisementList;
 }

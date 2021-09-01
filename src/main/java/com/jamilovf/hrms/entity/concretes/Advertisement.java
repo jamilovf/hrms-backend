@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -49,6 +51,7 @@ public class Advertisement {
     private int openPositions;
 
     @Column(name = "created_at")
+    @CreationTimestamp
     private LocalDate createdAt;
 
     @Column(name = "application_deadline")
@@ -62,4 +65,7 @@ public class Advertisement {
 
     @Column(name = "is_active")
     private boolean isActive;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "advertisement")
+    private List<FavoriteCandidateAdvertisement> favoriteCandidateAdvertisementList;
 }

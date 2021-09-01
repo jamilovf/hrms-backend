@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -40,6 +41,9 @@ public class Employer extends Person {
 
     @Column(name = "is_verified")
     private boolean isVerified;
+
+    @Column(name= "updated_fields")
+    private JSONObject updatedFields;
 
     @OneToMany(mappedBy = "employer")
     private List<Advertisement> advertisementList;
