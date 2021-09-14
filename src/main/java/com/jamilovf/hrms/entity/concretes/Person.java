@@ -41,11 +41,14 @@ public class Person {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "emailVerificationToken")
+    @Column(name = "email_verification_token")
     private String emailVerificationToken;
 
-    @Column(name = "emailVerificationStatus")
+    @Column(name = "email_verification_status")
     private Boolean emailVerificationStatus;
+
+    @Column(name = "password_reset_token")
+    private String passwordResetToken;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Notification> notificationList;

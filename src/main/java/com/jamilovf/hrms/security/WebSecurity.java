@@ -34,6 +34,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/auth/registerSystemPersonnel")
                 .permitAll()
+                .antMatchers("/api/auth/verifyEmailToken")
+                .permitAll()
+                .antMatchers("/api/auth/requestPasswordReset")
+                .permitAll()
                 .anyRequest().authenticated().and()
                 .addFilter(getAuthenticationFilter())
                 .addFilter(new AuthorizationFilter(authenticationManager()));

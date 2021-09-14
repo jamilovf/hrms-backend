@@ -29,10 +29,10 @@ public class EmployersController {
         this.employerService = employerService;
     }
 
-    @PostMapping("/add")
+    /*@PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody Employer employer){
         return ResponseEntity.ok(this.employerService.add(employer));
-    }
+    }*/
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getALL(){

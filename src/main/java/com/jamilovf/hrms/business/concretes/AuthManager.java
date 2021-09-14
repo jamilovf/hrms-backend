@@ -32,6 +32,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 @Service
@@ -64,57 +67,81 @@ public class AuthManager implements AuthService {
     }
 
     @Override
-    public Result registerCandidate(CandidateDto candidateDto) {
+    public Result registerCandidate(HttpServletRequest request, CandidateDto candidateDto) {
+        if(this.candidateDao.getByEmail(candidateDto.getEmail()) != null){
+            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
+        }
+        if(this.candidateDao.getByIdentityNumber(candidateDto.getIdentityNumber()) != null){
+            throw new AuthServiceException(ErrorMessages.IDENTITY_NUMBER_ALREADY_EXISTS.getErrorMessage());
+        }
+
         Candidate candidate = CandidateMapper.dtoToEntity(candidateDto);
         candidate.setEmail(candidateDto.getEmail());
         candidate.setPassword(bCryptPasswordEncoder.encode(candidateDto.getPassword()));
         candidate.setEmailVerificationStatus(false);
-
-        if(this.candidateDao.getByEmail(candidate.getEmail()) != null){
-            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
-        }
-        if(this.candidateDao.getByIdentityNumber(candidate.getIdentityNumber()) != null){
-            throw new AuthServiceException(ErrorMessages.IDENTITY_NUMBER_ALREADY_EXISTS.getErrorMessage());
-        }
+        candidate.setEmailVerificationToken(Utils.generateEmailVerificationToken());
 
         this.candidateService.add(candidate);
 
-        return new SuccessResult("Candidate registered successfully. "
-                + emailService.sendEmail(candidate.getEmail()));
+        try {
+            emailService.sendEmail(request, candidate);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return new SuccessResult("Candidate registered successfully.");
     }
 
     @Override
-    public Result registerEmployer(EmployerDto employerDto) {
+    public Result registerEmployer(HttpServletRequest request, EmployerDto employerDto) {
+        if(this.employerDao.getByEmail(employerDto.getEmail()) != null){
+            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
+        }
+
         Employer employer = EmployerMapper.dtoToEntity(employerDto);
         employer.setEmail(employerDto.getEmail());
         employer.setPassword(bCryptPasswordEncoder.encode(employerDto.getPassword()));
         employer.setEmailVerificationStatus(false);
-
-        if(this.employerDao.getByEmail(employer.getEmail()) != null){
-            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
-        }
+        employer.setEmailVerificationToken(Utils.generateEmailVerificationToken());
 
         this.employerService.add(employer);
 
-        return new SuccessResult("Employer registered successfully. "
-                + emailService.sendEmail(employer.getEmail()));
+        try {
+            emailService.sendEmail(request, employer);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return new SuccessResult("Employer registered successfully.");
     }
 
     @Override
-    public Result registerSystemPersonnel(SystemPersonnelDto systemPersonnelDto) {
+    public Result registerSystemPersonnel(HttpServletRequest request, SystemPersonnelDto systemPersonnelDto) {
+        if(this.systemPersonnelDao.getByEmail(systemPersonnelDto.getEmail()) != null){
+            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
+        }
+
         SystemPersonnel systemPersonnel = SystemPersonnelMapper.dtoToEntity(systemPersonnelDto);
         systemPersonnel.setEmail(systemPersonnelDto.getEmail());
         systemPersonnel.setPassword(bCryptPasswordEncoder.encode(systemPersonnelDto.getPassword()));
         systemPersonnel.setEmailVerificationStatus(false);
-
-        if(this.systemPersonnelDao.getByEmail(systemPersonnel.getEmail()) != null){
-            throw new AuthServiceException(ErrorMessages.EMAIL_ALREADY_EXISTS.getErrorMessage());
-        }
+        systemPersonnel.setEmailVerificationToken(Utils.generateEmailVerificationToken());
 
         this.systemPersonnelService.add(systemPersonnel);
 
-        return new SuccessResult("System Personnel registered successfully. "
-                + emailService.sendEmail(systemPersonnel.getEmail()));
+        try {
+            emailService.sendEmail(request,systemPersonnel);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        return new SuccessResult("System Personnel registered successfully.");
     }
 
     @Override
@@ -130,6 +157,7 @@ public class AuthManager implements AuthService {
     @Override
     public boolean verifyEmailToken(String token) {
         boolean returnValue = false;
+
         Person person = personDao.getByEmailVerificationToken(token);
 
         if(person != null){
@@ -141,6 +169,32 @@ public class AuthManager implements AuthService {
                 returnValue = true;
             }
         }
+        return returnValue;
+    }
+
+    @Override
+    public boolean requestPasswordReset(HttpServletRequest request, String email) {
+        boolean returnValue = false;
+
+        Person person = personDao.getByEmail(email);
+
+        if(person == null){
+            return returnValue;
+        }
+
+        String token = Utils.generatePasswordResetToken();
+        person.setPasswordResetToken(token);
+        personDao.save(person);
+
+        try {
+            emailService.sendPasswordResetRequest(request, person);
+            returnValue = true;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
         return returnValue;
     }
 

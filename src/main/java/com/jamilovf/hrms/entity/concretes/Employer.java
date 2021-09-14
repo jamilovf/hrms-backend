@@ -1,11 +1,14 @@
 package com.jamilovf.hrms.entity.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.json.JSONObject;
 
 import javax.persistence.*;
@@ -21,6 +24,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "person_id")
 @Accessors(chain = true)
 @Table(name = "employer")
+@TypeDef(name = "json", typeClass = JsonType.class)
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","advertisementList"})
 public class Employer extends Person {
 
@@ -42,8 +46,10 @@ public class Employer extends Person {
     @Column(name = "is_verified")
     private boolean isVerified;
 
+
+    @Type(type = "json")
     @Column(name= "updated_fields")
-    private JSONObject updatedFields;
+    private String updatedFields;
 
     @OneToMany(mappedBy = "employer")
     private List<Advertisement> advertisementList;

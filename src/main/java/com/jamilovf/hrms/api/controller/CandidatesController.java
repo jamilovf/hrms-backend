@@ -28,10 +28,10 @@ public class CandidatesController {
         this.candidateService = candidateService;
     }
 
-    @PostMapping("/add")
+   /* @PostMapping("/add")
     public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate) {
         return ResponseEntity.ok(this.candidateService.add(candidate));
-    }
+    }*/
 
     @GetMapping("/getAll")
     public ResponseEntity<?>  getAll() {
